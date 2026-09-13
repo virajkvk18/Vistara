@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #04060c;
+  color: #e6edf7;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #f5f7ff;
+}
+
+/* ---------- Scrollbars ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+@layer components {
+  /* ---------- Glass surfaces ---------- */
+  .glass-card {
+    @apply relative rounded-2xl border border-glass-line bg-glass backdrop-blur-xl;
+    background-image: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.07) 0%,
+      rgba(255, 255, 255, 0.02) 45%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .glass-subtle {
+    @apply rounded-xl border border-glass-line bg-glass/50 backdrop-blur-md;
+  }
+
+  .glass-hover {
+    @apply transition-all duration-300;
+  }
+  .glass-hover:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-1px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* ---------- Text helpers ---------- */
+  .text-gradient-title {
+    @apply bg-gradient-to-r from-slate-50 via-white to-accent-soft bg-clip-text text-transparent;
+  }
+
+  .font-sans {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
+  .font-mono {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 rounded-lg bg-accent px-3.5 py-2 text-sm font-semibold text-white shadow-glow transition-all duration-200 hover:bg-accent-dim active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-45;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-lg border border-glass-line bg-glass px-3.5 py-2 text-sm font-medium text-slate-200 transition-all duration-200 hover:border-white/20 hover:bg-glass-strong active:scale-[0.98];
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center gap-2 rounded-lg bg-govgold px-3.5 py-2 text-sm font-semibold text-night-950 transition-all duration-200 hover:bg-govgold-soft active:scale-[0.98];
+  }
+
+  /* ---------- Grid overlay for GIS canvas ---------- */
+  .map-grid::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+  }
+}
